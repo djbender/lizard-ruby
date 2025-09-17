@@ -3,7 +3,11 @@ require "minitest"
 module Lizard
   class MinitestReporter < Minitest::StatisticsReporter
     def report
-      super rescue nil
+      begin
+        super
+      rescue
+        nil
+      end
       send_to_lizard if should_report?
     end
 

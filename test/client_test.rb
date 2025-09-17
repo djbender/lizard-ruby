@@ -123,5 +123,4 @@ class ClientTest < Minitest::Test
 
     assert_instance_of Lizard::Client, client
   end
-
 end

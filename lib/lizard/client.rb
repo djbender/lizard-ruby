@@ -11,7 +11,7 @@ module Lizard
     def send_test_run(data)
       return unless configured?
 
-      payload = { test_run: data }
+      payload = {test_run: data}
       uri = URI("#{@url}/api/v1/test_runs")
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = uri.scheme == "https"
