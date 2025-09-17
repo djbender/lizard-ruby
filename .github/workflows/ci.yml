@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby-version: ['3.4']
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+
+    - name: Run tests
+      run: bundle exec rake test
+
+    - name: Check test coverage stability
+      run: ./check_coverage_stability.rb
+      if: matrix.ruby-version == '3.4'
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v4
+      if: matrix.ruby-version == '3.4'
+      with:
+        files: ./coverage/.resultset.json
+        fail_ci_if_error: false
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.4'
+        bundler-cache: true
+
+    - name: Install StandardRB
+      run: gem install standard
+
+    - name: Run StandardRB
+      run: standardrb --format progress
