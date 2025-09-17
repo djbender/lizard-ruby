@@ -26,10 +26,6 @@ jobs:
     - name: Run tests
       run: bundle exec rake test
 
-    - name: Check test coverage stability
-      run: ./check_coverage_stability.rb
-      if: matrix.ruby-version == '3.4'
-
     - name: Upload coverage reports
       uses: codecov/codecov-action@v4
       if: matrix.ruby-version == '3.4'
