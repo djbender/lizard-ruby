@@ -1,6 +1,11 @@
 require_relative "lizard/version"
 require_relative "lizard/client"
-require_relative "lizard/minitest_reporter"
+
+begin
+  require_relative "lizard/minitest_reporter"
+rescue LoadError
+  # Minitest not available
+end
 
 begin
   require_relative "lizard/rspec_formatter"
