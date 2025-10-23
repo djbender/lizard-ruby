@@ -28,6 +28,10 @@ module Lizard
     def should_report?
       # Don't report during test runs to avoid coverage inconsistency
       return false if ENV["LIZARD_TEST_MODE"]
+
+      # Only report from designated matrix job (if specified)
+      return false if ENV["LIZARD_REPORT"] != "true"
+
       ENV["LIZARD_API_KEY"] && ENV["LIZARD_URL"]
     end
 
