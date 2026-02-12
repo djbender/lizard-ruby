@@ -2,6 +2,13 @@
 
 A Ruby gem that reports test results from Minitest and RSpec to the Lizard API service.
 
+## Supported Ruby Versions
+
+- Ruby 3.2
+- Ruby 3.3
+- Ruby 3.4
+- Ruby 4.0
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -87,7 +94,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/djbender/lizard.
+Bug reports and pull requests are welcome on GitHub at https://github.com/djbender/lizard-ruby.
 
 ## License
 
