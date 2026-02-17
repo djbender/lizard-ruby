@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
 
 jobs:
   release:
@@ -28,13 +27,8 @@ jobs:
     - name: Set up GPR credentials
       run: |
         mkdir -p ~/.gem
-        echo -e "---\n:github: Bearer ${{ secrets.GITHUB_TOKEN }}" > ~/.gem/credentials
+        echo -e "---\n:github: Bearer ${{ secrets.GPR_TOKEN }}" > ~/.gem/credentials
         chmod 0600 ~/.gem/credentials
-
-    - name: Debug with tmate
-      uses: mxschmitt/action-tmate@v3
-      with:
-        detached: true
 
     - name: Publish to GitHub Packages
       run: gem push --key github --host https://rubygems.pkg.github.com/djbender lizard-*.gem
