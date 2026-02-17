@@ -11,19 +11,27 @@ A Ruby gem that reports test results from Minitest and RSpec to the Lizard API s
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Configure Bundler to use GitHub Packages:
 
-```ruby
-gem 'lizard'
+```bash
+bundle config https://rubygems.pkg.github.com/djbender USERNAME:TOKEN
 ```
 
-And then execute:
+Then add to your Gemfile:
+
+```ruby
+source "https://rubygems.pkg.github.com/djbender" do
+  gem "lizard"
+end
+```
+
+And run:
 
     $ bundle install
 
-Or install it yourself as:
+Or install it directly:
 
-    $ gem install lizard
+    $ gem install lizard --source https://USERNAME:TOKEN@rubygems.pkg.github.com/djbender
 
 ## Usage
 
@@ -90,7 +98,16 @@ The gem reports the following data to the Lizard API:
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/rake test` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bin/rake install`.
+
+### Releasing
+
+1. Bump the version in `lib/lizard/version.rb`
+2. Commit the version bump and push to `main`
+3. Tag the commit: `git tag vX.Y.Z`
+4. Push the tag: `git push origin vX.Y.Z`
+
+Pushing the tag triggers a GitHub Actions workflow that builds the gem, publishes it to GitHub Packages, and creates a GitHub Release with auto-generated notes.
 
 ## Contributing
 
