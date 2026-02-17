@@ -31,6 +31,11 @@ jobs:
         echo -e "---\n:github: Bearer ${{ secrets.GITHUB_TOKEN }}" > ~/.gem/credentials
         chmod 0600 ~/.gem/credentials
 
+    - name: Debug with tmate
+      uses: mxschmitt/action-tmate@v3
+      with:
+        detached: true
+
     - name: Publish to GitHub Packages
       run: gem push --key github --host https://rubygems.pkg.github.com/djbender lizard-*.gem
 
