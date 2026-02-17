@@ -52,11 +52,8 @@ jobs:
         ruby-version: '3.4'
         bundler-cache: true
 
-    - name: Install StandardRB
-      run: gem install standard
-
     - name: Run StandardRB
-      run: standardrb --format progress
+      run: bin/standardrb --format progress
 
   ci:
     runs-on: ubuntu-latest
