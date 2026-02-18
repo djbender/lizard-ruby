@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+
+- Ruby 3.2 support; minimum is now 3.3
+
 ## [0.1.0] - 2026-02-16
 
 ### Added
@@ -14,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minitest reporter and RSpec formatter
 - API client for Lizard service
 - `LIZARD_REPORT` env var to control reporting
-- CI workflow with Ruby 3.2–4.0 + head matrix
+- CI workflow with Ruby 3.3–4.0 + head matrix
 - StandardRB linting
 - Dependabot for bundler and GitHub Actions
 - Release workflow publishing to GitHub Packages with GitHub Releases

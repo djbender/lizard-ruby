@@ -4,7 +4,6 @@ A Ruby gem that reports test results from Minitest and RSpec to the Lizard API s
 
 ## Supported Ruby Versions
 
-- Ruby 3.2
 - Ruby 3.3
 - Ruby 3.4
 - Ruby 4.0
