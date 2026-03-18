@@ -32,7 +32,7 @@ jobs:
     - name: Run tests
       run: bundle exec rake test
       env:
-        LIZARD_REPORT: "true"
+        LIZARD_REPORT: ${{ matrix.ruby-version == '4.0' && 'true' || 'false' }}
         LIZARD_API_KEY: ${{ secrets.LIZARD_API_KEY }}
         LIZARD_URL: ${{ secrets.LIZARD_URL }}
 
