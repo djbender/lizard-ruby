@@ -8,7 +8,10 @@ class ContractTest < Minitest::Test
 
   def setup
     @spec = fetch_spec
-    skip "OpenAPI spec not reachable at #{SPEC_URL}" unless @spec
+    if @spec.nil?
+      msg = "OpenAPI spec not reachable at #{SPEC_URL}"
+      ENV["SKIP_CONTRACT_TESTS"] ? skip(msg) : raise(msg)
+    end
     @schemas = @spec.dig("components", "schemas")
   end
 
