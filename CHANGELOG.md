@@ -7,13 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-03-23
+
 ### Added
 
-- Lizard test reporting in CI and Minitest reporter plugin in test_helper
+- Metadata support for test reports (#34)
+- Lizard test reporting in CI and Minitest reporter plugin in test_helper (#30)
 
 ### Removed
 
-- Ruby 3.2 support; minimum is now 3.3
+- Ruby 3.2 support; minimum is now 3.3 (#20)
 
 ## [0.1.0] - 2026-02-16
 
@@ -28,5 +31,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Release workflow publishing to GitHub Packages with GitHub Releases
 - SimpleCov + Codecov integration
 
-[Unreleased]: https://github.com/djbender/lizard-ruby/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/djbender/lizard-ruby/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/djbender/lizard-ruby/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/djbender/lizard-ruby/releases/tag/v0.1.0
