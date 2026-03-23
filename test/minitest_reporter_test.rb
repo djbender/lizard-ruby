@@ -1,7 +1,7 @@
 require "test_helper"
 
 class MinitestReporterTest < Minitest::Test
-  LIZARD_ENV_KEYS = %w[LIZARD_TEST_MODE LIZARD_API_KEY LIZARD_URL LIZARD_REPORT].freeze
+  LIZARD_ENV_KEYS = %w[LIZARD_TEST_MODE LIZARD_API_KEY LIZARD_URL LIZARD_REPORT GITHUB_RUN_ID GITHUB_REPOSITORY].freeze
 
   def setup
     @original_env = LIZARD_ENV_KEYS.to_h { |k| [k, ENV[k]] }
@@ -35,6 +35,58 @@ class MinitestReporterTest < Minitest::Test
 
     client = mock
     client.expects(:send_test_run).once
+
+    Lizard::Client.stubs(:new).returns(client)
+
+    @reporter.stubs(:count).returns(5)
+    @reporter.stubs(:total_time).returns(1.5)
+    @reporter.stubs(:`).with("git rev-parse HEAD").returns("abc123")
+    @reporter.stubs(:`).with("git branch --show-current").returns("main")
+
+    SimpleCov.stubs(:result).returns(mock(covered_percent: 85.0))
+
+    capture_io do
+      @reporter.report
+    end
+  end
+
+  def test_report_includes_github_metadata_when_env_vars_present
+    ENV.delete("LIZARD_TEST_MODE")
+    ENV["LIZARD_API_KEY"] = "test_key"
+    ENV["LIZARD_URL"] = "https://test.example.com"
+    ENV["LIZARD_REPORT"] = "true"
+    ENV["GITHUB_RUN_ID"] = "23419710055"
+    ENV["GITHUB_REPOSITORY"] = "djbender/lizard-ruby"
+
+    expected_metadata = {github_run_id: "23419710055", github_repository: "djbender/lizard-ruby"}
+
+    client = mock
+    client.expects(:send_test_run).with(has_entry(:metadata, expected_metadata))
+
+    Lizard::Client.stubs(:new).returns(client)
+
+    @reporter.stubs(:count).returns(5)
+    @reporter.stubs(:total_time).returns(1.5)
+    @reporter.stubs(:`).with("git rev-parse HEAD").returns("abc123")
+    @reporter.stubs(:`).with("git branch --show-current").returns("main")
+
+    SimpleCov.stubs(:result).returns(mock(covered_percent: 85.0))
+
+    capture_io do
+      @reporter.report
+    end
+  end
+
+  def test_report_sends_empty_metadata_without_github_env_vars
+    ENV.delete("LIZARD_TEST_MODE")
+    ENV.delete("GITHUB_RUN_ID")
+    ENV.delete("GITHUB_REPOSITORY")
+    ENV["LIZARD_API_KEY"] = "test_key"
+    ENV["LIZARD_URL"] = "https://test.example.com"
+    ENV["LIZARD_REPORT"] = "true"
+
+    client = mock
+    client.expects(:send_test_run).with(has_entry(:metadata, {}))
 
     Lizard::Client.stubs(:new).returns(client)
 
