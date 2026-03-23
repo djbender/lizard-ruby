@@ -28,6 +28,7 @@ class MinitestReporterTest < Minitest::Test
   end
 
   def test_report_sends_to_lizard_when_configured
+    ENV.delete("LIZARD_TEST_MODE")
     ENV["LIZARD_API_KEY"] = "test_key"
     ENV["LIZARD_URL"] = "https://test.example.com"
     ENV["LIZARD_REPORT"] = "true"
@@ -50,6 +51,7 @@ class MinitestReporterTest < Minitest::Test
   end
 
   def test_report_handles_nil_simplecov_result
+    ENV.delete("LIZARD_TEST_MODE")
     ENV["LIZARD_API_KEY"] = "test_key"
     ENV["LIZARD_URL"] = "https://test.example.com"
     ENV["LIZARD_REPORT"] = "true"

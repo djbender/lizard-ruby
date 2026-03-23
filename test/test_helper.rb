@@ -15,6 +15,8 @@ require "lizard"
 require "minitest/autorun"
 require "mocha/minitest"
 
+ENV["LIZARD_TEST_MODE"] = "true" unless ENV["LIZARD_REPORT"] == "true"
+
 Minitest.extensions << "lizard"
 
 module Minitest
