@@ -14,3 +14,11 @@ $LOAD_PATH.unshift File.expand_path("../lib", __dir__)
 require "lizard"
 require "minitest/autorun"
 require "mocha/minitest"
+
+Minitest.extensions << "lizard"
+
+module Minitest
+  def self.plugin_lizard_init(options)
+    reporter << Lizard::MinitestReporter.new(options[:io], options)
+  end
+end
