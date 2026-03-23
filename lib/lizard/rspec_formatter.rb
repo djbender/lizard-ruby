@@ -20,7 +20,8 @@ module Lizard
         js_specs: 0,
         runtime: summary.duration,
         coverage: extract_coverage,
-        ran_at: Time.now.iso8601
+        ran_at: Time.now.iso8601,
+        metadata: github_metadata
       }
 
       Client.new.send_test_run(data)
@@ -39,6 +40,13 @@ module Lizard
       # :nocov:
 
       ENV["LIZARD_API_KEY"] && ENV["LIZARD_URL"]
+    end
+
+    def github_metadata
+      meta = {}
+      meta[:github_run_id] = ENV["GITHUB_RUN_ID"] if ENV["GITHUB_RUN_ID"]
+      meta[:github_repository] = ENV["GITHUB_REPOSITORY"] if ENV["GITHUB_REPOSITORY"]
+      meta
     end
 
     def extract_coverage

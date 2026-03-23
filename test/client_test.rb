@@ -29,6 +29,8 @@ class ClientTest < Minitest::Test
   end
 
   def test_send_test_run_returns_early_when_not_configured
+    ENV.delete("LIZARD_API_KEY")
+    ENV.delete("LIZARD_URL")
     client = Lizard::Client.new(api_key: nil, url: nil)
     result = client.send_test_run({test: "data"})
 
