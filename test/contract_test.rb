@@ -62,7 +62,7 @@ class ContractTest < Minitest::Test
     response = Net::HTTP.get_response(uri)
     return nil unless response.is_a?(Net::HTTPSuccess)
     YAML.safe_load(response.body)
-  rescue SocketError, Errno::ECONNREFUSED, Net::OpenTimeout, Timeout::Error
+  rescue SocketError, Errno::ECONNREFUSED, Timeout::Error
     nil
   end
 
