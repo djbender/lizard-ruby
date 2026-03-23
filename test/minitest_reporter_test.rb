@@ -1,15 +1,15 @@
 require "test_helper"
 
 class MinitestReporterTest < Minitest::Test
+  LIZARD_ENV_KEYS = %w[LIZARD_TEST_MODE LIZARD_API_KEY LIZARD_URL LIZARD_REPORT].freeze
+
   def setup
+    @original_env = LIZARD_ENV_KEYS.to_h { |k| [k, ENV[k]] }
     @reporter = Lizard::MinitestReporter.new
   end
 
   def teardown
-    ENV.delete("LIZARD_TEST_MODE")
-    ENV.delete("LIZARD_API_KEY")
-    ENV.delete("LIZARD_URL")
-    ENV.delete("LIZARD_REPORT")
+    LIZARD_ENV_KEYS.each { |k| ENV[k] = @original_env[k] }
   end
 
   def test_inherits_from_minitest_statistics_reporter

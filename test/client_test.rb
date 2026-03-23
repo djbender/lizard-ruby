@@ -1,11 +1,16 @@
 require "test_helper"
 
 class ClientTest < Minitest::Test
+  LIZARD_ENV_KEYS = %w[LIZARD_API_KEY LIZARD_URL].freeze
+
+  def setup
+    @original_env = LIZARD_ENV_KEYS.to_h { |k| [k, ENV[k]] }
+  end
+
   def teardown
     Lizard.api_key = nil
     Lizard.url = nil
-    ENV.delete("LIZARD_API_KEY")
-    ENV.delete("LIZARD_URL")
+    LIZARD_ENV_KEYS.each { |k| ENV[k] = @original_env[k] }
   end
 
   def test_initialize_accepts_parameters
