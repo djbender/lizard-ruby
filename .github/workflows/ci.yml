@@ -11,6 +11,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.ruby-version == 'head' }}
 
     strategy:
       matrix:
@@ -24,7 +25,7 @@ jobs:
     - uses: actions/checkout@v6.0.2
 
     - name: Set up Ruby ${{ matrix.ruby-version }}
-      uses: ruby/setup-ruby@v1.306.0
+      uses: ruby/setup-ruby@v1.307.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true
@@ -50,7 +51,7 @@ jobs:
     - uses: actions/checkout@v6.0.2
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.306.0
+      uses: ruby/setup-ruby@v1.307.0
       with:
         ruby-version: '3.4'
         bundler-cache: true
