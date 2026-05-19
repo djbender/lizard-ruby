@@ -39,7 +39,7 @@ jobs:
         LIZARD_URL: ${{ secrets.LIZARD_URL }}
 
     - name: Upload coverage reports
-      uses: codecov/codecov-action@v6.0.0
+      uses: codecov/codecov-action@v6.0.1
       if: matrix.ruby-version == '4.0'
       with:
         files: ./coverage/.resultset.json
