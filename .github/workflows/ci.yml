@@ -11,8 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # remove when bundler ships fix: https://github.com/ruby/rubygems/pull/9529
-    continue-on-error: ${{ matrix.ruby-version == 'head' }}
 
     strategy:
       matrix:
