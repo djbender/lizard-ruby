@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Run StandardRB linting on Ruby 4.0 (was 3.4)
+
 ## [0.2.0] - 2026-03-23
 
 ### Added
