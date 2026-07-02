@@ -25,7 +25,7 @@ jobs:
     - uses: actions/checkout@v7.0.0
 
     - name: Set up Ruby ${{ matrix.ruby-version }}
-      uses: ruby/setup-ruby@v1.314.0
+      uses: ruby/setup-ruby@v1.315.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
         bundler: ${{ matrix.bundler || 'Gemfile.lock' }}
@@ -52,7 +52,7 @@ jobs:
     - uses: actions/checkout@v7.0.0
 
     - name: Set up Ruby
-      uses: ruby/setup-ruby@v1.314.0
+      uses: ruby/setup-ruby@v1.315.0
       with:
         ruby-version: '4.0'
         bundler-cache: true
