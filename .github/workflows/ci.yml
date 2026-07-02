@@ -14,11 +14,12 @@ jobs:
 
     strategy:
       matrix:
-        ruby-version:
-          - '3.3'
-          - '3.4'
-          - '4.0'
-          - 'head'
+        include:
+          - ruby-version: '3.3'
+          - ruby-version: '3.4'
+          - ruby-version: '4.0'
+          - ruby-version: 'head'
+            bundler: default
 
     steps:
     - uses: actions/checkout@v7.0.0
@@ -27,6 +28,7 @@ jobs:
       uses: ruby/setup-ruby@v1.314.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
+        bundler: ${{ matrix.bundler || 'Gemfile.lock' }}
         bundler-cache: true
 
     - name: Run tests
